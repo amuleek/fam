@@ -180,4 +180,5 @@ for (int i = 0; i < numberOfElements; ++i)
     time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     cout << time_spent << endl;
 
-
+ return 0;
+}
