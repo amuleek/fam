@@ -112,4 +112,43 @@ public:
         _buckets.resize(size);
     }
 
+ void Initialize(const vector<int>& numbers)
+    {        
+        _tableSize = numbers.size();
+        _buckets.resize(numbers.size());
+        _elementsInCells.resize(numbers.size());
+        for (int i = 0; i < numbers.size(); ++i)
+        {
+            int hashKey = hash(_hashFuncA, _hashFuncB, _primeNumber, _tableSize, numbers[i]);
+            if (hashKey < 0) 
+                hashKey = - hashKey;
+            _elementsInCells[hashKey].push_back(numbers[i]);
+        }
+        for (int i = 0; i < numbers.size(); ++i)
+        {
+                _buckets[i].Construct(_elementsInCells[i]);
+        }
+    }
+
+    bool Contains(int number)
+    {
+        int hashKey = hash(_hashFuncA, _hashFuncB, _primeNumber, _tableSize, number);
+        if (hashKey < 0) 
+            hashKey = - hashKey;
+        return _buckets[hashKey].Contains(number);
+    }
+};
+
+int main(int argc, char* argv[])
+{
+    clock_t begin, end;
+    double time_spent;
+    std::srand (time(NULL));
+    int numberOfElements;
+    scanf("%i", &numberOfElements);
+
+    FixedSet fs;
+    begin = clock();
+    vector<int> inputVector;
+    fs.setTableSize(numberOfElements);
 
