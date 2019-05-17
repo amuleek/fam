@@ -59,4 +59,57 @@ public:
             {
                 int hashKey = hash(hash_a, hash_b, prime, size, *elem);
                 if (hashKey < 0) 
-                    hashKey = - hashKey
+                    hashKey = - hashKe  if (_cells[hashKey] != max_int) 
+                {
+                    flag = false;
+                    break;
+                }
+                _cells[hashKey] = *elem;
+                ++elem;
+            }
+
+            if (!flag)
+                flag = true;
+            else 
+                flag = false;
+        }
+    }
+
+    bool Contains(int elem)
+    {
+        if (size == 0)
+            return false;
+        int hashKey = hash(hash_a, hash_b, prime, size, elem);
+        if (hashKey < 0) 
+            hashKey = - hashKey;
+        if (_cells[hashKey] == elem)
+            return true;
+        return false;
+    }
+};
+
+// class for main hash table
+class FixedSet
+{
+    int _tableSize;
+    long_int _hashFuncA;
+    long_int _hashFuncB;
+    int _primeNumber;
+    vector<list<int> > _elementsInCells;
+    vector<Bucket> _buckets;
+
+public:
+    FixedSet()
+    {
+        _primeNumber = 100013; // the maximum prime number
+        _hashFuncA = std::rand() % _primeNumber;
+        _hashFuncB =  1 + std::rand() % (_primeNumber - 1);
+    }
+
+    void setTableSize(int size)
+    {
+        _tableSize = size;
+        _buckets.resize(size);
+    }
+
+
