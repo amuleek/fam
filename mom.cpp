@@ -151,4 +151,33 @@ int main(int argc, char* argv[])
     begin = clock();
     vector<int> inputVector;
     fs.setTableSize(numberOfElements);
+for (int i = 0; i < numberOfElements; ++i)
+    {
+        int elemValue;
+        scanf("%d", &elemValue);
+
+        inputVector.push_back(elemValue);
+    }
+
+    fs.Initialize(inputVector);
+    end = clock();
+    int numberOfElementsForSearch;
+    scanf("%i", &numberOfElementsForSearch);
+    for (int i = 0; i < numberOfElementsForSearch; ++i)
+    {
+        int elem;
+        scanf("%d", &elem);
+        if (fs.Contains(elem))
+        {
+            cout << "Yes" << endl;
+        }
+        else
+        {
+            cout << "No" << endl;
+        }
+    }
+
+    time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    cout << time_spent << endl;
+
 
